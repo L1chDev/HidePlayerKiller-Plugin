@@ -11,28 +11,35 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.potion.PotionEffectType;
 
 public class DeathListener implements Listener {
+    private final Plugin plugin;
 
+    public DeathListener(Plugin plugin) {
+        this.plugin = plugin;
+    }
 
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
+        final String pathEnable = "enabled";
+        if(!(plugin.getConfig().getBoolean(pathEnable))) {}
+        else {
+            try {
+                if (event.getEntity().getKiller() != null && event.getEntity().getKiller().getType() == EntityType.PLAYER) {
+                    //Who killed
+                    Player player = event.getEntity();
 
-        try {
-            if(event.getEntity().getKiller() != null && event.getEntity().getKiller().getType() == EntityType.PLAYER) {
-                //Who killed
-                Player player = event.getEntity();
-
-                //Killer
-                Player killer = event.getEntity().getKiller();
+                    //Killer
+                    Player killer = event.getEntity().getKiller();
 
 
-                //Check Invisible
-                if (killer != null && killer.hasPotionEffect(PotionEffectType.INVISIBILITY)) {
-                    event.setDeathMessage(player.getName() + " was killed.");
+                    //Check Invisible
+                    if (killer != null && killer.hasPotionEffect(PotionEffectType.INVISIBILITY)) {
+                        event.setDeathMessage(player.getName() + " was killed.");
+                    }
+
                 }
-
+            } catch (NullPointerException e) {
+                Bukkit.getServer().getConsoleSender().sendMessage("Игрок просто умер.");
             }
-        } catch (NullPointerException e) {
-            Bukkit.getServer().getConsoleSender().sendMessage("Игрок просто умер.");
         }
     }
 
