@@ -1,0 +1,5 @@
+hide-player:
+  enabled: true
+
+  # Preview in game: Nickname was killed.
+  death-message: "&c was killed."

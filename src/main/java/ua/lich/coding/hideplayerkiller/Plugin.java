@@ -9,5 +9,7 @@ public final class Plugin extends JavaPlugin {
     public void onEnable() {
         // Plugin startup logic
         Bukkit.getServer().getPluginManager().registerEvents(new DeathListener(), this);
+        getConfig().options().copyDefaults();
+        this.saveConfig();
     }
 }
