@@ -1,0 +1,5 @@
+name: HidePlayerKiller
+version: '${project.version}'
+main: ua.lich.coding.hideplayerkiller.Plugin
+api-version: '1.20'
+authors: [Lich]
